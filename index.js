@@ -17,14 +17,7 @@ mongoose.connect(process.env.mong_uri).then(() => {
 app.use(express.json());
 app.use(cors())
 app.get('/',(req,res)=>{
-  mongoose.connect(process.env.mong_uri).then(() => {
-  
-    const abc="Connected to MongoDB Atlas";
-    res.send(abc,process.env.mongo_uri)
-  }).catch((error) => {
-    console.error('Connection error', error.message);
-  });
-
+  res.send('RUNNING');
 })
 app.use('/api/client-records', clientRecordsRouter);
 app.use('/api/pending-records', pendingRecordsRouter);
