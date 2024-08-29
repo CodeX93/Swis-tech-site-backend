@@ -16,6 +16,9 @@ mongoose.connect(process.env.mong_uri).then(() => {
 
 app.use(express.json());
 app.use(cors())
+app.get('/',(req,res)=>{
+  res.send('running')
+})
 app.use('/api/client-records', clientRecordsRouter);
 app.use('/api/pending-records', pendingRecordsRouter);
 
