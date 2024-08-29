@@ -20,7 +20,7 @@ app.get('/',(req,res)=>{
   mongoose.connect(process.env.mong_uri).then(() => {
     console.log('Connected to MongoDB Atlas');
     const abc="Connected to MongoDB Atlas";
-    res.send(abc)
+    res.send(process.env.mong_uri)
   }).catch((error) => {
     console.error('Connection error', error.message);
   });
