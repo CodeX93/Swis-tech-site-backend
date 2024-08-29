@@ -8,7 +8,7 @@ const pendingRecordsRouter = require('./routes/pendingRecord');
 const app = express();
 const port = process.env.PORT || 3001;
 
-mongoose.connect("mongodb+srv://aghashahhyder:OWBlhg2BP1ha7QPB@switch-prod.c381v.mongodb.net/").then(() => {
+mongoose.connect(process.env.mong_uri).then(() => {
   console.log('Connected to MongoDB Atlas');
 }).catch((error) => {
   console.error('Connection error', error.message);
