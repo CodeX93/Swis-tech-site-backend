@@ -19,7 +19,8 @@ const pendingRecordSchema = new mongoose.Schema({
   paidOn: { type: Date },  // Optional field
   reportDelivery: { type: Date },
   srNo: { type: String },
-  testFee: { type: Number }  // Optional field
+  testFee: { type: Number },  // Optional field
+  orderDate: { type: Date, default: Date.now }  // New field with default value
 });
 
 module.exports = mongoose.model('PendingRecord', pendingRecordSchema);

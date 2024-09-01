@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
    "install-server": "npm install",
-    "start-server": "node index.js"
+    "start-server": "nodemon index.js"
  
   },
   "keywords": [],

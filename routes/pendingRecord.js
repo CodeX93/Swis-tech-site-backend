@@ -128,17 +128,17 @@ router.get('/next-seven-days-deliveries', async (req, res) => {
 
 router.post('/check', async (req, res) => {
   try {
-    const { proposedDate } = req.body;
-    const limit = 5; // Set your limit here
-
+    const { fwDoneOn } = req.body;
+    const limit = 3; // Set your limit here
+console.log(req.body)
     // Convert proposedDate to Date object
-    const date = new Date(proposedDate);
+    const date = new Date(fwDoneOn);
     if (isNaN(date.getTime())) {
       return res.status(400).json({ isAvailable: false });
     }
 
     // Count records with the same proposed date
-    const count = await PendingRecord.countDocuments({ proposedDate: date });
+    const count = await PendingRecord.countDocuments({ fwDoneOn: date });
 
     // Check if the count exceeds the limit
     const isAvailable = count < limit;
@@ -153,13 +153,21 @@ router.post('/check', async (req, res) => {
 // Create a new PendingRecord
 router.post('/', async (req, res) => {
   try {
-    const pendingRecord = new PendingRecord(req.body);
+    const data = req.body;
+
+    // Set the orderDate to the current date if it's not provided
+    if (!data.orderDate) {
+      data.orderDate = new Date();
+    }
+
+    const pendingRecord = new PendingRecord(data);
     await pendingRecord.save();
     res.status(201).send(pendingRecord);
   } catch (error) {
     res.status(400).send(error);
   }
 });
+
 
 // Get all PendingRecords
 router.get('/', async (req, res) => {
